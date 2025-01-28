@@ -55,7 +55,7 @@ func subscribeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 type PubSub struct {
-	topics map[string][]chan string
+	topics map[string][]chan string // key: topic, val: list of subscribers
 	mu     sync.RWMutex
 }
 
