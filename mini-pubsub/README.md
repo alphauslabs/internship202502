@@ -15,5 +15,5 @@ Publish a message to a topic using Curl:
 ```bash
 $ curl -X POST http://localhost:8080/publish \
 -H "Content-Type: application/json" \
--d ' {"topic":"sampletopic", "message":"Hello, World!"}'
+-d '{"topic":"sampletopic", "message":"Hello, World!"}'
 ```
