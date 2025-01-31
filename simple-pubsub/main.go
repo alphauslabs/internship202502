@@ -16,6 +16,11 @@ type contents struct {
 var ps = NewPubSub()
 
 func publishHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed, should be POST", http.StatusMethodNotAllowed)
+		return
+	}
+
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, "Error reading request body", http.StatusInternalServerError)
@@ -37,6 +42,11 @@ func publishHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func subscribeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed, should be GET", http.StatusMethodNotAllowed)
+		return
+	}
+
 	topic := r.URL.Query().Get("topic")
 	if topic == "" {
 		http.Error(w, "Topic is required", http.StatusBadRequest)
