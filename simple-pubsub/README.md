@@ -13,7 +13,7 @@ $ curl http://{VM'sIP}:8080/subscribe?topic=sampletopic
 Publish a message to a topic using Curl:
 
 ```bash
-$ curl -X POST http://localhost:8080/publish \
+$ curl -X POST http://{VM'sIP}:8080/publish \
 -H "Content-Type: application/json" \
 -d '{"topic":"sampletopic", "message":"Hello, World!"}'
 ```
