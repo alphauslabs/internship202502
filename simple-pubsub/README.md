@@ -7,7 +7,7 @@ $ go run main.go
 Subscribe to a topic using Curl:
 
 ```bash
-$ curl http://localhost:8080/subscribe?topic=sampletopic
+$ curl http://{VM'sIP}:8080/subscribe?topic=sampletopic
 ```
 
 Publish a message to a topic using Curl:
