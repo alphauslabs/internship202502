@@ -13,4 +13,12 @@ func main() {
 	defer listener.Close()
 
 	log.Println("TCP server listening on :80")
+	for {
+		_, err := listener.Accept()
+		if err != nil {
+			log.Printf("Error accepting connection: %s", err)
+			continue
+		}
+
+	}
 }
