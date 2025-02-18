@@ -2,18 +2,15 @@ package main
 
 import (
 	"log"
-	"net/http"
+	"net"
 )
 
 func main() {
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Println("[healthcheck] Received request")
-		w.WriteHeader(http.StatusOK)
-	})
-	log.Println("Serving at :80")
-	err := http.ListenAndServe(":80", nil)
+	listener, err := net.Listen("tcp", ":80")
 	if err != nil {
-		log.Fatalf("Error starting server: %s", err)
+		log.Fatalf("Error starting TCP server: %s", err)
 	}
+	defer listener.Close()
+
+	log.Println("TCP server listening on :80")
 }
