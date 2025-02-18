@@ -12,5 +12,8 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 	})
 	log.Println("Serving at :80")
-	http.ListenAndServe(":80", nil)
+	err := http.ListenAndServe(":80", nil)
+	if err != nil {
+		log.Fatalf("Error starting server: %s", err)
+	}
 }
