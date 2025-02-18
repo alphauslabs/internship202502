@@ -32,8 +32,8 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	log.Println("serving http on :50051")
-	err = http.ListenAndServe(":50051", nil)
+	log.Println("serving http on :8080")
+	err = http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatalf("Error starting HTTP server: %s", err)
 	}
