@@ -20,5 +20,6 @@ func main() {
 			continue
 		}
 
+		log.Println("Accepted connection")
 	}
 }
