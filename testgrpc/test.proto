@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package testgrpc;
+
+option go_package = "github.com/alphauslabs/internship202502";
+
+// The PubSub service definition.
+service Test {
+  // Sends a message to a topic.
+  rpc Greet (GreetRequest) returns (GreetResponse);
+
+}
+
+// The request message containing the topic and message.
+message GreetRequest {
+  string message = 1;
+}
+
+// The response message for the Publish method.
+message GreetResponse {
+  string message = 1;
+}
+
