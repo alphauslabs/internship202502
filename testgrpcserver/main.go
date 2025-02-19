@@ -28,6 +28,27 @@ func (s *server) Greet(_ context.Context, in *pb.GreetRequest) (*pb.GreetRespons
 
 func main() {
 	flag.Parse()
+
+	listener, err := net.Listen("tcp", ":80")
+	if err != nil {
+		log.Fatalf("Error starting TCP server: %s", err)
+	}
+	defer listener.Close()
+
+	log.Println("TCP server listening on :80")
+
+	go func() {
+		for {
+			c, err := listener.Accept()
+			if err != nil {
+				log.Printf("Error accepting connection: %s", err)
+				continue
+			}
+			log.Println("Accepted connection for health checks")
+			c.Close()
+		}
+	}()
+
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
