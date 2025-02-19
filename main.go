@@ -4,6 +4,9 @@ import (
 	"log"
 	"net"
 	"net/http"
+
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/h2c"
 )
 
 func main() {
@@ -27,14 +30,20 @@ func main() {
 		}
 	}()
 
-	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		log.Println("Received!")
 		w.WriteHeader(http.StatusOK)
 	})
 
-	log.Println("serving http on :8080")
-	err = http.ListenAndServe(":8080", nil)
-	if err != nil {
+	server := &http.Server{
+		Addr:    ":50051",
+		Handler: h2c.NewHandler(mux, &http2.Server{}),
+	}
+
+	log.Println("serving http on :50051")
+	if err := server.ListenAndServe(); err != nil {
 		log.Fatalf("Error starting HTTP server: %s", err)
 	}
+
 }
